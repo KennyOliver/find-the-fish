@@ -11,29 +11,34 @@ from termcolor import colored
 import random
 #====================
 def find_fish(): 
-  print("Welcome to the find the fish game - guess where the fish is!")
-  print("You score 10 points if you find a fish\n") 
+  print("All you have to do is guess where the fishes are!")
+  print("You score 10 points per fish\n") 
 
   score = 0 #initialise score variable to zero
-  pond = [[0,0,0],[0,0,0],[0,0,0],[0,0,0]] #set up the 2 D array
+  pond = [[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
 
   repeat_range = random.randint(1,4)
+  print(f"There are {repeat_range} fishes!")
   
   for _ in range(repeat_range):
     rand_x = random.randint(0,3)
     rand_y = random.randint(0,2)
     pond[rand_x][rand_y] = "F"
-  
-    row = int(input("Guess the row number (0 to 3)\t--> "))
-    column = int(input("Guess the column number (0 to 2)\t--> "))
-  
+    
+    row = int(input("Guess row (0 to 3)\t--> "))
+    column = int(input("Guess column (0 to 2) --> "))
+    while row not in range(0,3+1):
+      row = int(input("ROW must be between 0-3\t\t--> "))
+    while column not in range(0,2+1):
+      column = int(input("COLUMN must be between 0-2 --> "))
+    
     if pond[row][column] == "F":
-      print("well done - you\'ve found a fish!\n")
+      print("Well done - you found a fish!\n")
       score += 10
     else:
       print("No fish here!\n")
 
-  print(f"Your score is {score}")
+  print(f"Your score is {score}/{10*repeat_range}")
   print ("Thanks for playing - come back soon!")
 
   replay()
